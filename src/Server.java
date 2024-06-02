@@ -15,6 +15,7 @@ public class Server {
         ServerSocket serverSocket = new ServerSocket(PORT);//tao socket va lang nghe
         while(true){
         Socket clientSocket = serverSocket.accept();// chap nhan ket noi
+        System.out.println("da ket noi");
         // trao doi thong tin
         ClientHandler clientHandler = new ClientHandler(clientSocket);
          clientHandler.start();
