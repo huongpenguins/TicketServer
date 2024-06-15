@@ -44,38 +44,43 @@ public class ClientHandler extends Thread {
             bw.close();
             fw.close();
         }
+
+
         public static int[] check(){
-        String l=null;
-        int[] a=new int[24];
-        for(int i=0;i<24;i++){
-            a[i]=1;
-        }
-        
-        try (BufferedReader reader = new BufferedReader(new FileReader(id))) {
-            while((l=reader.readLine())!=null&&!l.equals("")){
-              int n= Integer.parseInt(l);
-              a[n-1]=0;
+            String l=null;
+            int[] a=new int[24];
+            for(int i=0;i<24;i++){
+                a[i]=1;
             }
-            reader.close();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return a;
+            
+            try (BufferedReader reader = new BufferedReader(new FileReader(id))) {
+                while((l=reader.readLine())!=null&&!l.equals("")){
+                int n= Integer.parseInt(l);
+                a[n-1]=0;
+                }
+                reader.close();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            return a;
     }
+
     @Override
     public void run(){
         try {
             while(true){
             a=check();
-        for(int i=0;i<24;i++){
+            for(int i=0;i<24;i++){
             socket.getOutputStream().write(a[i]);
             //System.out.println(a[i]);
         }
 
         int i=inputStream.read();
         if(i>0&&i<25){
+
             semaphore.acquire();
+        a=check();
         if(a[i-1]==0) outputStream.write(0);
         else {outputStream.write(1);
             writeId(i);
