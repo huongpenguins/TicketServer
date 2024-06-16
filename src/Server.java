@@ -16,6 +16,7 @@ public class Server {
         try {
         ServerSocket serverSocket = new ServerSocket(PORT);//tao socket va lang nghe
         int i=0;
+        
         while(i<MAX_CLIENT){
         Socket clientSocket = serverSocket.accept();// chap nhan ket noi
         System.out.println("da ket noi");
@@ -25,6 +26,7 @@ public class Server {
          clientHandler.start();
          i++;
         }
+
         }
          catch (Exception e) {
            e.printStackTrace();

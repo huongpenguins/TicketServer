@@ -18,6 +18,7 @@ public class ClientHandler extends Thread {
     static File id = new File("src/id");
     static int[] a;
     Semaphore semaphore;
+
     public ClientHandler(Socket socket,Semaphore semaphore){
         this.socket=socket;
         this.semaphore=semaphore;
@@ -31,11 +32,10 @@ public class ClientHandler extends Thread {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        
-       
-        
+        }   
     }
+
+    
         public static void writeId(int i) throws IOException{
               FileWriter fw = new FileWriter(id, true);
             BufferedWriter bw = new BufferedWriter(fw);
